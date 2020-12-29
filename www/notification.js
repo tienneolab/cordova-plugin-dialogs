@@ -19,7 +19,7 @@
  *
  */
 
-var exec = require('cordova/exec');
+var cordova = require('cordova');
 var platform = require('cordova/platform');
 
 /**
@@ -39,7 +39,7 @@ module.exports = {
         var _message = typeof message === 'string' ? message : JSON.stringify(message);
         var _title = typeof title === 'string' ? title : 'Alert';
         var _buttonLabel = buttonLabel && typeof buttonLabel === 'string' ? buttonLabel : 'OK';
-        exec(completeCallback, null, 'Notification', 'alert', [_message, _title, _buttonLabel]);
+        cordova.exec(completeCallback, null, 'Notification', 'alert', [_message, _title, _buttonLabel]);
     },
 
     /**
@@ -65,7 +65,7 @@ module.exports = {
 
         _buttonLabels = convertButtonLabels(_buttonLabels);
 
-        exec(resultCallback, null, 'Notification', 'confirm', [_message, _title, _buttonLabels]);
+        cordova.exec(resultCallback, null, 'Notification', 'confirm', [_message, _title, _buttonLabels]);
     },
 
     /**
@@ -95,7 +95,7 @@ module.exports = {
         _buttonLabels = convertButtonLabels(_buttonLabels);
 
         var _defaultText = defaultText || '';
-        exec(resultCallback, null, 'Notification', 'prompt', [_message, _title, _buttonLabels, _defaultText]);
+        cordova.exec(resultCallback, null, 'Notification', 'prompt', [_message, _title, _buttonLabels, _defaultText]);
     },
 
     /**
@@ -106,7 +106,7 @@ module.exports = {
      */
     beep: function (count) {
         var defaultedCount = count || 1;
-        exec(null, null, 'Notification', 'beep', [defaultedCount]);
+        cordova.exec(null, null, 'Notification', 'beep', [defaultedCount]);
     },
 
     /**
@@ -116,7 +116,7 @@ module.exports = {
      * @param {Function} errorCallback   The callback that is called on failure to dismiss previously opened dialog.
      */
     dismissPrevious: function (successCallback, errorCallback) {
-        exec(successCallback, errorCallback, 'Notification', 'dismissPrevious', []);
+        cordova.exec(successCallback, errorCallback, 'Notification', 'dismissPrevious', []);
     },
 
     /**
@@ -126,7 +126,7 @@ module.exports = {
      * @param {Function} errorCallback   The callback that is called on failure to dismiss all previously opened dialogs.
      */
     dismissAll: function (successCallback, errorCallback) {
-        exec(successCallback, errorCallback, 'Notification', 'dismissAll', []);
+        cordova.exec(successCallback, errorCallback, 'Notification', 'dismissAll', []);
     }
 };
 
